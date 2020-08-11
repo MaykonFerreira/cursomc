@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maykon.cursomc.domain.Categoria;
-import com.maykon.cursomc.services.CategoriaService;
+import com.maykon.cursomc.domain.Estado;
+import com.maykon.cursomc.services.EstadoService;
 
 @RestController
-@RequestMapping(value="/categorias")
-public class CategoriaResource {
+@RequestMapping(value="/estados")
+public class EstadoResource {
 
 	@Autowired
-	private CategoriaService service;
+	private EstadoService service;
 	
 	
 	@RequestMapping(value ="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
-		Categoria obj = service.buscar(id);
+		Estado obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 		/*
 		Categoria cat1 = new Categoria(1, "Informática");
