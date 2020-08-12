@@ -1,0 +1,53 @@
+[33mcommit cd13cb503c8247ec5f99a7c5e9307f489e7d35d6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 18:57:45 2020 -0300
+
+    Estado e Cidade
+
+[33mcommit 4953e4b183b600aa3d92a26561014dcce9ebdc46[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 17:29:12 2020 -0300
+
+    Ajustes no endpoint / categorias/id
+
+[33mcommit b0e4a305de4a8601c7e03234806a8d1b8b100f23[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 16:55:14 2020 -0300
+
+    Produto e associacao m to m
+
+[33mcommit f3007983095fa57f8baacb1eee5504927b080f63[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 16:11:30 2020 -0300
+
+    Criando operacao de instanciacao
+
+[33mcommit a49b5f46f663753a38fc11fadaac68c333c946f0[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 15:56:10 2020 -0300
+
+    Criando Repository e Service
+
+[33mcommit 15b21e893c9b2dbbc5ee89fd659fe93e962fccfc[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 14:32:44 2020 -0300
+
+    Banco de Dados H2 e criar BD
+
+[33mcommit d4575055b7cc83b06d3c95e342ad115ee507c7ed[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 14:02:49 2020 -0300
+
+    testando 1a classe de dominio - Categoria
+
+[33mcommit 358c7939de95c1a8d17dbad27f4f225e6fd510d0[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 13:26:32 2020 -0300
+
+    REST testado
+
+[33mcommit 45d68d9368f63194a3b1c21dda6782fe596de5f1[m
+Author: Maykon Ferreira <lmaykonf@gmail.com>
+Date:   Tue Aug 11 13:05:06 2020 -0300
+
+    Projeto Criado

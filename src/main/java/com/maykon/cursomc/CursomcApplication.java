@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.maykon.cursomc.domain.Categoria;
 import com.maykon.cursomc.domain.Cidade;
+import com.maykon.cursomc.domain.Cliente;
+import com.maykon.cursomc.domain.Endereco;
 import com.maykon.cursomc.domain.Estado;
 import com.maykon.cursomc.domain.Produto;
+import com.maykon.cursomc.domain.enums.TipoCliente;
 import com.maykon.cursomc.repositories.CategoriaRepository;
 import com.maykon.cursomc.repositories.CidadeRepository;
+import com.maykon.cursomc.repositories.ClienteRepository;
+import com.maykon.cursomc.repositories.EnderecoRepository;
 import com.maykon.cursomc.repositories.EstadoRepository;
 import com.maykon.cursomc.repositories.ProdutoRepository;
 
@@ -28,6 +33,11 @@ public class CursomcApplication implements CommandLineRunner {
 	private CidadeRepository cidrepo;
 	@Autowired
 	private EstadoRepository estrepo;
+	@Autowired
+	private ClienteRepository clirepo;
+	@Autowired
+	private EnderecoRepository endrepo;
+	
 	
 	
 	public static void main(String[] args) {
@@ -69,11 +79,25 @@ public class CursomcApplication implements CommandLineRunner {
 		//est1.getCidades().addAll(Arrays.asList(cid1));
 		//est2.getCidades().addAll(Arrays.asList(cid2,cid3,cid4));
 		
+		
 		catrepo.saveAll(Arrays.asList(cat1,cat2,cat3));
 		prodrepo.saveAll(Arrays.asList(p1,p2,p3));
 		
 		estrepo.saveAll(Arrays.asList(est1,est2));
 		cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3,cid4));
+		
+		Cliente cli1 = new Cliente(null,"Maria Silva","maria@gmail.com","363789812377",TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27363323","93838393"));
+		
+		Endereco e1 = new Endereco(null,"Rua Flores","300","apto 300","Jardim","38220834",cli1,cid1);
+		Endereco e2 = new Endereco(null,"Avenida Matos","105","Sala 800","Centro","38777012",cli1,cid2);
+		
+		
+		
+		//clirepo.saveAll(Arrays.asList(cli1));
+		//cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+		clirepo.saveAll(Arrays.asList(cli1));
+		endrepo.saveAll(Arrays.asList(e1,e2));
 		
 		
 	}
