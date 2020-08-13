@@ -29,7 +29,5 @@ public class PagamentoComCartao extends Pagamento{
 		this.numeroDeParcelas = numeroDeParcelas;
 	}
 	
-
-	
 	
 }
