@@ -1,5 +1,6 @@
 package com.maykon.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.maykon.cursomc.domain.Categoria;
 import com.maykon.cursomc.repositories.CategoriaRepository;
-import com.maykon.cursomc.services.exceptions.ObjectNotFoundException;
 import com.maykon.cursomc.services.exceptions.DataIntegrityException;
+import com.maykon.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -47,5 +48,8 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possivel excluir um categoria que possui produtos");
 		}
 		
+	}
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 }
