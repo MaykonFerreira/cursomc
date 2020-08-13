@@ -2,13 +2,13 @@ package com.maykon.cursomc.services;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.domain.Sort.Direction;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-
 
 import com.maykon.cursomc.domain.Categoria;
 import com.maykon.cursomc.dto.CategoriaDTO;
@@ -37,9 +37,15 @@ public class CategoriaService {
 	}
 	public Categoria update(Categoria obj) {
 		//obj.setId(null);
-		buscar(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = buscar(obj.getId());
+		updateData(newObj,obj);
+		return repo.save(newObj);
 	}
+
+	private void  updateData(Categoria newObj,Categoria obj) {
+		newObj.setNome(obj.getNome());
+		
+	}	
 	
 	public void delete(Integer id) {
 		//obj.setId(null);

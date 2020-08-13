@@ -1,6 +1,5 @@
 package com.maykon.cursomc.services;
 
-import java.nio.channels.UnsupportedAddressTypeException;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,11 @@ public class ClienteService {
 		updateData(newObj,obj);
 		return repo.save(newObj);
 	}
-	
+
+	private void  updateData(Cliente newObj,Cliente obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
+	}	
 	public void delete(Integer id) {
 		//obj.setId(null);
 		buscar(id);
@@ -70,9 +73,6 @@ public class ClienteService {
 		return new Cliente(objDto.getId(),objDto.getNome(),objDto.getEmail(),null,null);
 		//throw new UnsupportedAddressTypeException();
 	}	
-	private void  updateData(Cliente newObj,Cliente obj) {
-		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());
-	}
+
 	
 }
