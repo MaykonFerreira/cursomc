@@ -3,11 +3,13 @@ package com.maykon.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.maykon.cursomc.domain.Categoria;
 import com.maykon.cursomc.repositories.CategoriaRepository;
 import com.maykon.cursomc.services.exceptions.ObjectNotFoundException;
+import com.maykon.cursomc.services.exceptions.DataIntegrityException;
 
 @Service
 public class CategoriaService {
@@ -32,5 +34,18 @@ public class CategoriaService {
 		//obj.setId(null);
 		buscar(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		//obj.setId(null);
+		buscar(id);
+		try {
+			repo.deleteById(id);
+		}
+		
+		catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel excluir um categoria que possui produtos");
+		}
+		
 	}
 }
