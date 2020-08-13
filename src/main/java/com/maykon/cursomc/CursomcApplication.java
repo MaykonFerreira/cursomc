@@ -13,6 +13,7 @@ import com.maykon.cursomc.domain.Cidade;
 import com.maykon.cursomc.domain.Cliente;
 import com.maykon.cursomc.domain.Endereco;
 import com.maykon.cursomc.domain.Estado;
+import com.maykon.cursomc.domain.ItemPedido;
 import com.maykon.cursomc.domain.Pagamento;
 import com.maykon.cursomc.domain.PagamentoComBoleto;
 import com.maykon.cursomc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.maykon.cursomc.repositories.CidadeRepository;
 import com.maykon.cursomc.repositories.ClienteRepository;
 import com.maykon.cursomc.repositories.EnderecoRepository;
 import com.maykon.cursomc.repositories.EstadoRepository;
+import com.maykon.cursomc.repositories.ItemPedidoRepository;
 import com.maykon.cursomc.repositories.PagamentoRepository;
 import com.maykon.cursomc.repositories.PedidoRepository;
 import com.maykon.cursomc.repositories.ProdutoRepository;
@@ -51,6 +53,9 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PedidoRepository pedrepo;
+	
+	@Autowired
+	private ItemPedidoRepository pedirepo;
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	
@@ -119,6 +124,17 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
 		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00,1,800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		
 		//clirepo.saveAll(Arrays.asList(cli1));
 		//cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		clirepo.saveAll(Arrays.asList(cli1));
@@ -126,6 +142,8 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		pedrepo.saveAll(Arrays.asList(ped1,ped2));
 		pagrepo.saveAll(Arrays.asList(pag1,pag2));
+		pedirepo.saveAll(Arrays.asList(ip1,ip2,ip3));
+		
 		
 		
 		
