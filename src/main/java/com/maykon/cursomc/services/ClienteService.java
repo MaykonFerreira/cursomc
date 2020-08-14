@@ -90,7 +90,7 @@ public class ClienteService {
 		return repo.findAll(pageRequest);
 	}
 	
-	public Cliente fromxDTO(ClienteDTO objDto) {
+	public Cliente fromDTO(ClienteDTO objDto) {
 	
 		return new Cliente(objDto.getId(),objDto.getNome(),objDto.getEmail(),null,null);
 		//throw new UnsupportedAddressTypeException();
