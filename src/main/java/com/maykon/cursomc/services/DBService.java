@@ -1,12 +1,11 @@
-package com.maykon.cursomc;
+package com.maykon.cursomc.services;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Service;
 
 import com.maykon.cursomc.domain.Categoria;
 import com.maykon.cursomc.domain.Cidade;
@@ -31,9 +30,8 @@ import com.maykon.cursomc.repositories.PagamentoRepository;
 import com.maykon.cursomc.repositories.PedidoRepository;
 import com.maykon.cursomc.repositories.ProdutoRepository;
 
-@SpringBootApplication
-public class CursomcApplication implements CommandLineRunner {
-
+@Service
+public class DBService {
 	@Autowired
 	private CategoriaRepository catrepo;
 	
@@ -58,17 +56,10 @@ public class CursomcApplication implements CommandLineRunner {
 	private ItemPedidoRepository pedirepo;
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-	
-	
-	public static void main(String[] args) {
-		SpringApplication.run(CursomcApplication.class, args);
-
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
+	public void instantiateTestDatabase() throws ParseException {
 		
-		/*	
+		
+		
 		Categoria cat1 = new Categoria(null,"Informatica");
 		Categoria cat2 = new Categoria(null,"Escritorio");
 		Categoria cat3 = new Categoria(null,"Cama Mesa Banho");
@@ -169,8 +160,6 @@ public class CursomcApplication implements CommandLineRunner {
 		pedrepo.saveAll(Arrays.asList(ped1,ped2));
 		pagrepo.saveAll(Arrays.asList(pag1,pag2));
 		pedirepo.saveAll(Arrays.asList(ip1,ip2,ip3));
-			
-		*/
 	}
 
 }

@@ -68,7 +68,7 @@ public class Pedido implements Serializable {
 			sum = sum + ip.getSubTotal();
 		}
 		return sum;
-	}
+	} 
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
