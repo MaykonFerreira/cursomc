@@ -61,6 +61,14 @@ public class Pedido implements Serializable {
 		
 	}
 
+	public double getValorTotal() {
+		
+		double sum=0;
+		for(ItemPedido ip : itens) {
+			sum = sum + ip.getSubTotal();
+		}
+		return sum;
+	}
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
