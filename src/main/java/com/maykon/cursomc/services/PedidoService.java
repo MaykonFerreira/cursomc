@@ -20,5 +20,10 @@ public class PedidoService {
 		return obj.orElse(null);
 
 	}
+	
+	public Pedido insert(Pedido obj) {
+		repo.save(obj);
+		return obj;
+	}
 
 }
