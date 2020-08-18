@@ -1,0 +1,12 @@
+
+
+mysql --host=us-cdbr-east-02.cleardb.com --user=b03e5777e6ca4e --password=250b96f1 --reconnect heroku_459b6fd0fd07217 < arquivo.sql
+
+CLEARDB_DATABASE_URL: mysql://b03e5777e6ca4e:250b96f1@us-cdbr-east-02.cleardb.com/heroku_459b6fd0fd07217?reconnect=true
+
+
+host
+heroku_459b6fd0fd07217
+
+Username:	b03e5777e6ca4e
+Password:	250b96f1 (Reset)

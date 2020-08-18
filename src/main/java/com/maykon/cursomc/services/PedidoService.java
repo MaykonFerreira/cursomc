@@ -15,6 +15,7 @@ import com.maykon.cursomc.repositories.ItemPedidoRepository;
 import com.maykon.cursomc.repositories.PagamentoRepository;
 import com.maykon.cursomc.repositories.PedidoRepository;
 import com.maykon.cursomc.repositories.ProdutoRepository;
+import com.maykon.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PedidoService {
@@ -24,6 +25,7 @@ public class PedidoService {
 
 	@Autowired
 	private ProdutoService produtoService;
+	
 	@Autowired
 	private ProdutoRepository repoProd;
 
@@ -39,13 +41,12 @@ public class PedidoService {
 	
 	public Pedido buscar(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
-		return obj.orElse(null);
-
+		return obj.orElseThrow(() -> new ObjectNotFoundException(	
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 	
 	@Transactional
 	public Pedido insert(Pedido obj) {
-		
 		obj.setId(null);
 		obj.setInstante(new Date());
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
@@ -57,15 +58,14 @@ public class PedidoService {
 		}
 		obj = repo.save(obj);
 		repopag.save(obj.getPagamento());
-		
+		 
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
 			ip.setPreco(produtoService.buscar(ip.getProduto().getId()).getPreco());
+			//ip.setPreco(repoProd.findById(ip.getProduto().getId()).get().getPreco());
 			ip.setPedido(obj);
 		}
-		
 		repoip.saveAll(obj.getItens());
-		
 		return obj;
 	}
 

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.maykon.cursomc.domain.Categoria;
 import com.maykon.cursomc.domain.Pedido;
-import com.maykon.cursomc.dto.CategoriaDTO;
 import com.maykon.cursomc.services.PedidoService;
 
 @RestController
@@ -31,20 +29,21 @@ public class PedidoResource {
 		
 		Pedido obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
-		/*
-		Categoria cat1 = new Categoria(1, "Informática");
-		Categoria cat2 = new Categoria(2, "Escritório");
-		List<Categoria> lista = new ArrayList<>();
-		lista.add(cat1);
-		lista.add(cat2);
-		return lista;
-		*/		
-		//return "REST esta funcionando";
 	}
+	/*
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> inserir(@Valid @RequestBody Pedido obj) {
+	public ResponseEntity<Void> inserir(@Valid @RequestBody Pedido obj)  {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+	*/
+	
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 }

@@ -87,6 +87,14 @@ public class Produto implements Serializable {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+	
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,12 +118,7 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
-	}
+
 
 	
 	
