@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.maykon.cursomc.services.DBService;
 import com.maykon.cursomc.services.EmailService;
 import com.maykon.cursomc.services.MockEmailService;
+import com.maykon.cursomc.services.SmtpEmailService;
 
 @Configuration
 @Profile("dev")
@@ -38,4 +39,8 @@ public class DevConfig {
 		return new MockEmailService();
 	}
 	
+	@Bean
+	public SmtpEmailService smtpEmail() {
+		return new SmtpEmailService();
+	}
 }

@@ -123,7 +123,7 @@ public class DBService {
 		estrepo.saveAll(Arrays.asList(est1,est2));
 		cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3,cid4));
 		
-		Cliente cli1 = new Cliente(null,"Maria Silva","maria@gmail.com","363789812377",TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null,"Maria Silva","ana28.bela@gmail.com","363789812377",TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("27363323","93838393"));
 		
 		Endereco e1 = new Endereco(null,"Rua Flores","300","apto 300","Jardim","38220834",cli1,cid1);

@@ -48,6 +48,9 @@ public class PedidoService {
 	@Autowired
 	private EmailService emailService;
 	
+	@Autowired
+	private SmtpEmailService smtpEmailService;
+	
 	
 	public Pedido buscar(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
@@ -78,7 +81,8 @@ public class PedidoService {
 		}
 		repoip.saveAll(obj.getItens());
 		//System.out.println(obj);
-		emailService.envioPedidoConfirmado(obj);
+		//emailService.envioPedidoConfirmado(obj);
+		smtpEmailService.envioPedidoConfirmado(obj);
 		return obj;
 	}
 
