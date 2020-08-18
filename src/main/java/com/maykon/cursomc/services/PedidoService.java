@@ -82,7 +82,8 @@ public class PedidoService {
 		repoip.saveAll(obj.getItens());
 		//System.out.println(obj);
 		//emailService.envioPedidoConfirmado(obj);
-		smtpEmailService.envioPedidoConfirmado(obj);
+		//smtpEmailService.envioPedidoConfirmado(obj);
+		smtpEmailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
 
