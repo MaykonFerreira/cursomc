@@ -11,6 +11,7 @@ import com.maykon.cursomc.domain.ItemPedido;
 import com.maykon.cursomc.domain.PagamentoComBoleto;
 import com.maykon.cursomc.domain.Pedido;
 import com.maykon.cursomc.domain.enums.EstadoPagamento;
+import com.maykon.cursomc.repositories.ClienteRepository;
 import com.maykon.cursomc.repositories.ItemPedidoRepository;
 import com.maykon.cursomc.repositories.PagamentoRepository;
 import com.maykon.cursomc.repositories.PedidoRepository;
@@ -36,8 +37,13 @@ public class PedidoService {
 	private BoletoService boletoService;
 	
 	@Autowired
-	private PagamentoRepository repopag;	
+	private PagamentoRepository repopag;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
+	@Autowired
+	private ClienteRepository clienteRepo;	
 	
 	public Pedido buscar(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
@@ -49,6 +55,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		obj.setCliente(clienteService.buscar(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 
@@ -61,11 +68,12 @@ public class PedidoService {
 		 
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
+			ip.setProduto(produtoService.buscar(ip.getProduto().getId()));
 			ip.setPreco(produtoService.buscar(ip.getProduto().getId()).getPreco());
-			//ip.setPreco(repoProd.findById(ip.getProduto().getId()).get().getPreco());
 			ip.setPedido(obj);
 		}
 		repoip.saveAll(obj.getItens());
+		System.out.println(obj);
 		return obj;
 	}
 

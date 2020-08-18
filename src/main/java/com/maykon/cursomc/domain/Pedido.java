@@ -35,7 +35,7 @@ public class Pedido implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -156,7 +156,7 @@ public class Pedido implements Serializable {
 		for (ItemPedido ip : getItens()) {
 			builder.append(ip.toString());
 		}
-		builder.append("Valor total: ");
+		builder.append("\nValor total: ");
 		builder.append(nf.format(getValorTotal()));
 		return builder.toString();
 	}
