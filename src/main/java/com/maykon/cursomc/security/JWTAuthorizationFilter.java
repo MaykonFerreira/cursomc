@@ -20,7 +20,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
 	private UserDetailsService userDetailsService;
 	
-	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, UserDetailsService userDetailsService) {
+	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, 
+									UserDetailsService userDetailsService) {
 		super(authenticationManager);
 		this.jwtUtil = jwtUtil;
 		this.userDetailsService = userDetailsService;
@@ -32,12 +33,15 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException {
 		
 		String header = request.getHeader("Authorization");
+							// pega o inicio do cabeçalho
 		if (header != null && header.startsWith("Bearer ")) {
+														// desconta o 7 digitos do Beader+espaço = 7
 			UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
 			if (auth != null) {
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
 		}
+		// Tudo ok ele 
 		chain.doFilter(request, response);
 	}
 
