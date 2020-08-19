@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.maykon.cursomc.domain.Categoria;
@@ -32,6 +33,11 @@ import com.maykon.cursomc.repositories.ProdutoRepository;
 
 @Service
 public class DBService {
+	
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	@Autowired
 	private CategoriaRepository catrepo;
 	
@@ -57,9 +63,8 @@ public class DBService {
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	public void instantiateTestDatabase() throws ParseException {
-		
-		
-		
+	
+				
 		Categoria cat1 = new Categoria(null,"Informatica");
 		Categoria cat2 = new Categoria(null,"Escritorio");
 		Categoria cat3 = new Categoria(null,"Cama Mesa Banho");
@@ -123,7 +128,7 @@ public class DBService {
 		estrepo.saveAll(Arrays.asList(est1,est2));
 		cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3,cid4));
 		
-		Cliente cli1 = new Cliente(null,"Maria Silva","ana28.bela@gmail.com","363789812377",TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null,"Maria Silva","ana28.bela@gmail.com","363789812377",TipoCliente.PESSOAFISICA,pe.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("27363323","93838393"));
 		
 		Endereco e1 = new Endereco(null,"Rua Flores","300","apto 300","Jardim","38220834",cli1,cid1);
