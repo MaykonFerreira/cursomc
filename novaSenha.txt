@@ -1,0 +1,3 @@
+2020-08-19 18:09:37.592  INFO 14940 --- [nio-8080-exec-5] c.m.cursomc.services.MockEmailService    : Simulando Envio de Email
+2020-08-19 18:09:37.593  INFO 14940 --- [nio-8080-exec-5] c.m.cursomc.services.MockEmailService    : SimpleMailMessage: from=lmaykonf@gmail.com; replyTo=null; to=lmaykonf@gmail.com; cc=; bcc=; sentDate=Wed Aug 19 18:09:37 GMT-03:00 2020; subject=Solicitação de Nova Senha; text=Nova Senha: Tnwcxm21w6
+2020-08-19 18:09:37.594  INFO 14940 --- [nio-8080-exec-5] c.m.cursomc.services.MockEmailService    : Email enviado
