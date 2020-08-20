@@ -40,9 +40,13 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
 	@Autowired
+	private ClienteService clienteService;
+	
+	@Autowired
 	private CidadeRepository repocid;
 	@Autowired
 	private EnderecoRepository repoend;
+	
 	
 	@Autowired
 	private S3Service s3Service;
@@ -138,7 +142,7 @@ public class ClienteService {
 		
 	}	
 	
-	/*
+	
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
 	
 		UserSS user = UserService.authenticated();
@@ -147,6 +151,12 @@ public class ClienteService {
 			throw new AuthorizationException("Acesso negado");
 		}
 		
+		URI uri = s3Service.uploadFile(multipartFile);
+		Cliente cli = clienteService.buscar(user.getId());
+		cli.setImageUrl(uri.toString());
+		repo.saveAll(Arrays.asList(cli));
+		return uri;
+		/*
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
 		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
@@ -154,12 +164,12 @@ public class ClienteService {
 		String fileName = prefix + user.getId() + ".jpg";
 		
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
-		
+		*/
 	}
-	 */
-	public URI uploadProfilePicture(MultipartFile multipartFile) {
-		return s3Service.uploadFile(multipartFile);
-	}
+	 
+	//public URI uploadProfilePicture(MultipartFile multipartFile) {
+		//return s3Service.uploadFile(multipartFile);
+	//}
 
 	
 }

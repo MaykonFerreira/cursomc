@@ -57,6 +57,9 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
+	
+	private String imageUrl;
+	
 
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);
@@ -71,6 +74,14 @@ public class Cliente implements Serializable {
 		this.tipo =(tipo==null) ? null : tipo.getCod();
 		this.senha=senha;
 		addPerfil(Perfil.CLIENTE);
+	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	
 	public List<Pedido> getPedidos() {
@@ -153,10 +164,6 @@ public class Cliente implements Serializable {
 		this.telefones = telefones;
 	}
 
-
-	
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -181,6 +188,8 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 
 }
