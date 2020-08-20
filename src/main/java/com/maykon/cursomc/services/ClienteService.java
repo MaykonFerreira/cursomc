@@ -17,12 +17,15 @@ import org.springframework.stereotype.Service;
 import com.maykon.cursomc.domain.Cidade;
 import com.maykon.cursomc.domain.Cliente;
 import com.maykon.cursomc.domain.Endereco;
+import com.maykon.cursomc.domain.enums.Perfil;
 import com.maykon.cursomc.domain.enums.TipoCliente;
 import com.maykon.cursomc.dto.ClienteDTO;
 import com.maykon.cursomc.dto.ClienteNewDTO;
 import com.maykon.cursomc.repositories.CidadeRepository;
 import com.maykon.cursomc.repositories.ClienteRepository;
 import com.maykon.cursomc.repositories.EnderecoRepository;
+import com.maykon.cursomc.security.UserSS;
+import com.maykon.cursomc.services.exceptions.AuthorizationException;
 import com.maykon.cursomc.services.exceptions.DataIntegrityException;
 import com.maykon.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -40,6 +43,12 @@ public class ClienteService {
 	private EnderecoRepository repoend;
 	
 	public Cliente buscar(Integer id) {
+		
+		// Controla o acesso de acordo com o perfil
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		//Optional<Categoria> obj = repo.findById(id);
 		//return obj.orElse(null);
 		Optional<Cliente> obj = repo.findById(id);
@@ -50,6 +59,8 @@ public class ClienteService {
 
 	@Transactional
 	public Cliente inserir(Cliente obj) {
+		
+
 		obj.setId(null);
 		obj = repo.save(obj);
 		repoend.saveAll(obj.getEnderecos());
