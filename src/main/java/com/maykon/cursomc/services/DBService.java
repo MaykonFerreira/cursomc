@@ -130,19 +130,23 @@ public class DBService {
 		cidrepo.saveAll(Arrays.asList(cid1,cid2,cid3,cid4));
 		
 		Cliente cli1 = new Cliente(null,"Maria Silva","maria@gmail.com","363789812377",TipoCliente.PESSOAFISICA,pe.encode("123"));
-		Cliente cli2 = new Cliente(null,"Ana Cristina","ana28.bela@gmail.com","25368274882",TipoCliente.PESSOAFISICA,pe.encode("123"));
+		Cliente cli2 = new Cliente(null,"Ana Cristina","ana28.bela@gmail.com","40960338047",TipoCliente.PESSOAFISICA,pe.encode("123"));
+		Cliente cli3 = new Cliente(null,"Maykon","lmaykon@gmail.com","48670768054",TipoCliente.PESSOAFISICA,pe.encode("vitoria"));
 		
-		cli2.addPerfil(Perfil.ADMIN);
+		cli3.addPerfil(Perfil.ADMIN);
 		
 		cli1.getTelefones().addAll(Arrays.asList("27363323","93838393"));
 		cli2.getTelefones().addAll(Arrays.asList("957079270","957635607"));
+		cli3.getTelefones().addAll(Arrays.asList("957079270","957635607"));
 		
 		Endereco e1 = new Endereco(null,"Rua Flores","300","apto 300","Jardim","38220834",cli1,cid1);
 		Endereco e2 = new Endereco(null,"Avenida Matos","105","Sala 800","Centro","38777012",cli1,cid2);
 		Endereco e3 = new Endereco(null,"Avenida Madame Curie","1134","apto 703","Jd Dourado","07093040",cli2,cid4);
+		Endereco e4 = new Endereco(null,"Avenida Madame Curie","1134","apto 703","Jd Dourado","07093040",cli3,cid4);
 		
 		Pedido ped1 = new Pedido(null,sdf.parse("30/09/2020 10:32"),cli1,e1);
-		Pedido ped2 = new Pedido(null,sdf.parse("30/09/2020 10:10"),cli1,e2);
+		Pedido ped2 = new Pedido(null,sdf.parse("30/09/2020 10:10"),cli2,e2);
+		Pedido ped3 = new Pedido(null,sdf.parse("30/09/2020 10:10"),cli3,e3);
 		
 		Pagamento pag1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		
@@ -150,31 +154,41 @@ public class DBService {
 		
 		Pagamento pag2 = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE,ped2,sdf.parse("20/10/2020 00:00"),null);
 		ped2.setPagamento(pag2);
+
+		Pagamento pag3 = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE,ped3,sdf.parse("20/10/2020 00:00"),null);
+		ped3.setPagamento(pag3);
 		
-		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
+		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2,ped3));
 		
 		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
 		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00,1,800.00);
+		ItemPedido ip4 = new ItemPedido(ped3, p2, 100.00,3,800.00);
 		
 		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));
+		ped3.getItens().addAll(Arrays.asList(ip4));
 		
 		p1.getItens().addAll(Arrays.asList(ip1));
 		p3.getItens().addAll(Arrays.asList(ip2));
 		p2.getItens().addAll(Arrays.asList(ip3));
+		p2.getItens().addAll(Arrays.asList(ip4));
 		
 		//clirepo.saveAll(Arrays.asList(cli1));
 		//cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		//cli2.getEnderecos().addAll(Arrays.asList(e3));
-		clirepo.saveAll(Arrays.asList(cli1,cli2));
+		cli1.setEnderecos(Arrays.asList(e1,e2));
+		cli2.setEnderecos(Arrays.asList(e3));
+		cli3.setEnderecos(Arrays.asList(e3));
 		
-		endrepo.saveAll(Arrays.asList(e1,e2));
+		clirepo.saveAll(Arrays.asList(cli1,cli2,cli3));
+		
+		endrepo.saveAll(Arrays.asList(e1,e2,e3,e4));
 
 		
-		pedrepo.saveAll(Arrays.asList(ped1,ped2));
-		pagrepo.saveAll(Arrays.asList(pag1,pag2));
-		pedirepo.saveAll(Arrays.asList(ip1,ip2,ip3));
+		pedrepo.saveAll(Arrays.asList(ped1,ped2,ped3));
+		pagrepo.saveAll(Arrays.asList(pag1,pag2,pag3));
+		pedirepo.saveAll(Arrays.asList(ip1,ip2,ip3,ip4));
 	}
 
 }
