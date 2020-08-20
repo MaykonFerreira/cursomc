@@ -52,6 +52,7 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 
+	// Download de Arquivo
 	@ExceptionHandler(FileException.class)
 	public ResponseEntity<StandardError> file(FileException e, HttpServletRequest request) {
 		
