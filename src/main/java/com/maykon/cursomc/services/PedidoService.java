@@ -10,18 +10,16 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.amazonaws.services.licensemanager.model.AuthorizationException;
 import com.maykon.cursomc.domain.Cliente;
 import com.maykon.cursomc.domain.ItemPedido;
 import com.maykon.cursomc.domain.PagamentoComBoleto;
 import com.maykon.cursomc.domain.Pedido;
 import com.maykon.cursomc.domain.enums.EstadoPagamento;
-import com.maykon.cursomc.repositories.ClienteRepository;
 import com.maykon.cursomc.repositories.ItemPedidoRepository;
 import com.maykon.cursomc.repositories.PagamentoRepository;
 import com.maykon.cursomc.repositories.PedidoRepository;
-import com.maykon.cursomc.repositories.ProdutoRepository;
 import com.maykon.cursomc.security.UserSS;
-import com.maykon.cursomc.services.exceptions.AuthorizationException;
 import com.maykon.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -33,8 +31,8 @@ public class PedidoService {
 	@Autowired
 	private ProdutoService produtoService;
 	
-	@Autowired
-	private ProdutoRepository repoProd;
+	//@Autowired
+	//private ProdutoRepository repoProd;
 
 	@Autowired
 	private ItemPedidoRepository repoip;
@@ -48,11 +46,11 @@ public class PedidoService {
 	@Autowired
 	private ClienteService clienteService;
 	
-	@Autowired
-	private ClienteRepository clienteRepo;	
+	//@Autowired
+	//private ClienteRepository clienteRepo;	
 	
-	@Autowired
-	private EmailService emailService;
+	//@Autowired
+	//private EmailService emailService;
 	
 	@Autowired
 	private SmtpEmailService smtpEmailService;

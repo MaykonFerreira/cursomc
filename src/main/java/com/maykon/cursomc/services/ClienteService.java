@@ -1,5 +1,6 @@
 package com.maykon.cursomc.services;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.licensemanager.model.AuthorizationException;
 import com.maykon.cursomc.domain.Cidade;
 import com.maykon.cursomc.domain.Cliente;
 import com.maykon.cursomc.domain.Endereco;
@@ -25,7 +28,6 @@ import com.maykon.cursomc.repositories.CidadeRepository;
 import com.maykon.cursomc.repositories.ClienteRepository;
 import com.maykon.cursomc.repositories.EnderecoRepository;
 import com.maykon.cursomc.security.UserSS;
-import com.maykon.cursomc.services.exceptions.AuthorizationException;
 import com.maykon.cursomc.services.exceptions.DataIntegrityException;
 import com.maykon.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -41,6 +43,12 @@ public class ClienteService {
 	private CidadeRepository repocid;
 	@Autowired
 	private EnderecoRepository repoend;
+	
+	@Autowired
+	private S3Service s3Service;
+	
+	//@Autowired
+	//private ImageService imageService;
 	
 	public Cliente buscar(Integer id) {
 		
@@ -129,7 +137,29 @@ public class ClienteService {
 		return cli;
 		
 	}	
-
+	
+	/*
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+	
+		UserSS user = UserService.authenticated();
+		
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+		jpgImage = imageService.cropSquare(jpgImage);
+		jpgImage = imageService.resize(jpgImage, size);
+		
+		String fileName = prefix + user.getId() + ".jpg";
+		
+		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		
+	}
+	 */
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
+	}
 
 	
 }
