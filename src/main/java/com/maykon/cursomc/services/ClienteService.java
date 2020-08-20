@@ -60,6 +60,9 @@ public class ClienteService {
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
 	
+	@Value("${img.profile.size}")
+	private Integer size;
+	
 	public Cliente buscar(Integer id) {
 		
 		// Controla o acesso de acordo com o perfil
@@ -164,11 +167,14 @@ public class ClienteService {
 		return uri;
 		*/
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
-		String fileName = prefix + user.getId()+".jpg";
-		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
-		/*
 		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
+		String fileName = prefix + user.getId()+".jpg";
+		
+		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		
+		/*
+		
 		
 		String fileName = prefix + user.getId() + ".jpg";
 		
