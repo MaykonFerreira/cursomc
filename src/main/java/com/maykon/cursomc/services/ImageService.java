@@ -19,6 +19,7 @@ import com.maykon.cursomc.services.exceptions.FileException;
 public class ImageService {
 
 	public BufferedImage getJpgImageFromFile(MultipartFile uploadedFile) {
+		// Pega a extensão do arquivo
 		String ext = FilenameUtils.getExtension(uploadedFile.getOriginalFilename());
 		if (!"png".equals(ext) && !"jpg".equals(ext)) {
 			throw new FileException("Somente imagens PNG e JPG são permitidas");
@@ -36,8 +37,8 @@ public class ImageService {
 	}
 
 	public BufferedImage pngToJpg(BufferedImage img) {
-		BufferedImage jpgImage = new BufferedImage(img.getWidth(), img.getHeight(),
-				BufferedImage.TYPE_INT_RGB);
+		BufferedImage jpgImage = new BufferedImage(img.getWidth(), img.getHeight(),	BufferedImage.TYPE_INT_RGB);
+		//  											preenche o fundo na cor Branca
 		jpgImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
 		return jpgImage;
 	}

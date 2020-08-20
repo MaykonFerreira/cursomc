@@ -131,7 +131,7 @@ public class DBService {
 		
 		Cliente cli1 = new Cliente(null,"Maria Silva","maria@gmail.com","363789812377",TipoCliente.PESSOAFISICA,pe.encode("123"));
 		Cliente cli2 = new Cliente(null,"Ana Cristina","ana28.bela@gmail.com","40960338047",TipoCliente.PESSOAFISICA,pe.encode("123"));
-		Cliente cli3 = new Cliente(null,"Maykon","lmaykon@gmail.com","48670768054",TipoCliente.PESSOAFISICA,pe.encode("vitoria"));
+		Cliente cli3 = new Cliente(null,"Maykon","lmaykonf@gmail.com","48670768054",TipoCliente.PESSOAFISICA,pe.encode("vitoria"));
 		
 		cli3.addPerfil(Perfil.ADMIN);
 		
