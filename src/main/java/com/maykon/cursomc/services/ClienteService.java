@@ -41,8 +41,9 @@ public class ClienteService {
 	
 	@Autowired
 	private ClienteRepository repo;
-	@Autowired
-	private ClienteService clienteService;
+	
+	//@Autowired
+	//private ClienteService clienteService;
 	
 	@Autowired
 	private CidadeRepository repocid;
