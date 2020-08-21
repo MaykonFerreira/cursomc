@@ -1,5 +1,6 @@
 package com.maykon.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,14 @@ public class CidadeService {
 
 	
 	public Cidade buscar(Integer id) {
-		//Optional<Categoria> obj = repo.findById(id);
-		//return obj.orElse(null);
 		Optional<Cidade> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-		"Objeto não encontrado! Id: " + id + ", Tipo: " + Cidade.class.getName()));		
+		"Objeto não encontrado! Id: " + id + ", Cidade: " + Cidade.class.getName()));		
 
+	}
+	
+	public List<Cidade> findByEstado(Integer estadoId){
+		return repo.findCidades(estadoId);
 	}
 
 }

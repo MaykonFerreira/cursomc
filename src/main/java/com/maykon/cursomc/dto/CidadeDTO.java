@@ -2,35 +2,32 @@ package com.maykon.cursomc.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.maykon.cursomc.domain.Cliente;
+import com.maykon.cursomc.domain.Cidade;
 import com.maykon.cursomc.services.validation.ClienteUpdate;
 
 @ClienteUpdate
-public class ClienteDTO implements Serializable {
+public class CidadeDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
+	@Length(min=3, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
 	//@Size(min = 5, max =80, message = "O tamanho deve ser entre 5 e 80 caracteres.")
 	private String nome;
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Email(message="email invalido")
-	private String email;
+
 	
-	public ClienteDTO() {
+	public CidadeDTO() {
 		
 	}
-	public ClienteDTO(Cliente obj) {
+	public CidadeDTO(Cidade obj) {
 		id = obj.getId();
 		nome = obj.getNome();
-		email = obj.getEmail();
+		
 	}
 
 	public Integer getId() {
@@ -49,13 +46,7 @@ public class ClienteDTO implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 
 	
