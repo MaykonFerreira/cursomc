@@ -64,10 +64,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
+	// Controle do CORS 
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration corsConf = new CorsConfiguration().applyPermitDefaultValues();
+		corsConf.setAllowedMethods(Arrays.asList("PUT","GET","DELETE","POST","OPTIONS"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		source.registerCorsConfiguration("/**",corsConf);
 		return source;
 	}
 
