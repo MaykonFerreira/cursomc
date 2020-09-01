@@ -9,6 +9,7 @@ import com.maykon.cursomc.domain.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente,Integer>{
 
+	// Otimiza a consulta para retorno rapido
 	@Transactional(readOnly=true)
 	Cliente findByEmail(String email);
 	
