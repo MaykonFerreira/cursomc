@@ -14,7 +14,7 @@ import com.maykon.cursomc.services.MockEmailService;
 import com.maykon.cursomc.services.SmtpEmailService;
 
 @Configuration
-@Profile("dev")
+@Profile("prod")
 public class ProdConfig {
 
 	@Autowired
