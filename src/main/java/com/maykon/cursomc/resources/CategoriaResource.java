@@ -22,13 +22,18 @@ import com.maykon.cursomc.domain.Categoria;
 import com.maykon.cursomc.dto.CategoriaDTO;
 import com.maykon.cursomc.services.CategoriaService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
 	@Autowired
 	private CategoriaService service;
-
+	// Personalizada o nome da Busca
+	@ApiOperation(value="Busca por id")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
@@ -37,6 +42,7 @@ public class CategoriaResource {
 
 	}
 
+	@ApiOperation(value="Inserir Nova Categoria")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> inserir_new(@Valid @RequestBody CategoriaDTO objDto) {
@@ -46,6 +52,7 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@ApiOperation(value="Atualizar")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
@@ -58,7 +65,12 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 
 	}
+	@ApiOperation(value="Excluir")
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	// Customiza um retorno do endpoint somente nesse ponto
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+			@ApiResponse(code = 404, message = "Código inexistente") })
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 
@@ -66,6 +78,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@ApiOperation(value="Listar Todas as Categorias")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> Listar() {
 
@@ -74,7 +87,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDTO);
 
 	}
-
+	@ApiOperation(value="Busca Customizada com paginação")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
